@@ -1,18 +1,32 @@
+from GreyMatter.SenseCells.tts import tts
 import speech_recognition as sr
-
-r = sr.Recognizer()
-
-with sr.Microphone() as source:
-	print("Say something!")
-	audio = r.listen(source)
-
-try:
-	recognized_speech = r.recognize_google(audio, key=" AIzaSyBFWL5ySjW4FpUsjC3VMi5XeyvUO7eEhKU")
-except sr.UnknownValueError:
-	print("Couldn't recognize audio")
-except sr.RequestError as e:
-	print("Couldn't request resuls from Google speech service : {}".format(e))
+from brain import brain
 
 
-with open("recording.wav", "wb") as f:
-	f.write(audio.get_wav_data())
+def stt():
+    tts("Hi! I'm Scarlett. How can I help you today?")
+    r = sr.Recognizer()
+
+    with sr.Microphone() as source:
+        audio = r.listen(source)
+
+    try:
+        recognized_speech = r.recognize_google(audio)
+
+        # tts(recognized_speech)
+
+        return recognized_speech
+
+    except sr.UnknownValueError:
+        print("Couldn't recognize audio")
+    except sr.RequestError as e:
+        print("Couldn't request results from Google speech service : {}".format(e))
+
+
+def main():
+    speech = stt()
+    brain("Debasish", speech)
+    return
+
+if __name__ == '__main__':
+    main()

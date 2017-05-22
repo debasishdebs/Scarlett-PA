@@ -13,6 +13,7 @@ def tts(message):
     return os.system(tts_command + ' "' + message + '" ')
 
 def stt():
+    tts("Hi! I'm Scarlett. How can I help you today?")
     r = sr.Recognizer()
 
     with sr.Microphone() as source:
@@ -28,9 +29,10 @@ def stt():
     except sr.RequestError as e:
         print("Couldn't request results from Google speech service : {}".format(e))
 
-    return
+    return True
 
 def main():
+    stt()
     return
 
 if __name__ == '__main__':
