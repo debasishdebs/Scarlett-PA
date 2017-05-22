@@ -6,7 +6,7 @@ def tts(message):
 
 	print("Sending it back to speech engine to hear back what was said!")
 
-	tts_command = "espeak"
+	tts_command = "espeak -ven-uk+f3"
 
 	return os.system(tts_command + ' "' + message + '" ')
 
