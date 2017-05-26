@@ -15,8 +15,8 @@ def who_are_you():
 
     pass
 
-def undefined():
-
+def undefined(message):
+    print("The text is {}".format(message))
     tts("I dont know what that means!")
 
     pass

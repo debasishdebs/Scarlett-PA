@@ -1,4 +1,4 @@
-from GreyMatter import general_conversations, tell_time
+from GreyMatter import general_conversations, tell_time, get_wheather, get_youtube
 
 
 def brain(name, speech_text):
@@ -27,5 +27,10 @@ def brain(name, speech_text):
         general_conversations.where_born()
     elif check_message("what time"):
         tell_time.what_is_time()
+    elif check_message("weather today") or check_message("weather today"):
+        get_wheather.get_weather()
+    elif check_message("play"):
+        print(speech_text)
+        get_youtube.main(speech_text)
     else:
-        general_conversations.undefined()
+        general_conversations.undefined(speech_text)
