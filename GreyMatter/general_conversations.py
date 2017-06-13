@@ -10,7 +10,6 @@ def who_are_you():
                 "Scarlett! Didn't I tell you before? You are very forgetting!",
                 "You ask that so many times! I'm Scarlett!"]
 
-    # message = "Hi! I'm Scarlett, your own personal assistant! I'm self learning, and you to-do task list will keep on increasing!"
     tts(random.choice(messages))
 
     pass
