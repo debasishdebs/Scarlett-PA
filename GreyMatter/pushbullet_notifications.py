@@ -5,6 +5,7 @@ import websocket
 import threading
 import time
 from GreyMatter.SenseCells.tts import tts
+import creds as cr
 
 
 def backup():
@@ -84,9 +85,9 @@ class GetNotifications(object):
     This class used Pushbullet API to read notification from my phone. 
     """
     def __init__(self):
-        self.API_key = "o.0uXY4V8zygueZLziiZcaXA18ldTldaSl"
-        self.url = "https://api.pushbullet.com/v2/pushes?limit=1"
-        self.websocket_url = "wss://stream.pushbullet.com/websocket/{}"
+        self.API_key = cr.PUSHBULLET_API_KEY
+        self.url = cr.PUSHBULLET_URL
+        self.websocket_url = cr.PUSHBULLET_WEBSOCKET_URL
 
         self.headers = {'Access-Token': self.API_key}
         pass

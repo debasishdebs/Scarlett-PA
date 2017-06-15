@@ -5,6 +5,7 @@
 
 import pandas as pd
 from whatsapp import Client
+import config as cfg
 
 
 class SendWhatsapp(object):
@@ -18,7 +19,7 @@ class SendWhatsapp(object):
         pass
 
     def __read_contacts_(self):
-        df = pd.read_csv("Contacts.csv")
+        df = pd.read_csv(cfg.CONTACTS_DUMP_CSV)
         return df
 
     def __fetch_number_(self):

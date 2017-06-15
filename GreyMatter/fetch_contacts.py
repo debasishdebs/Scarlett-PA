@@ -104,22 +104,24 @@ import atom.http_core
 import gdata.contacts.client
 from contactsFeedParser import googleContactsFeedParser
 import time
+import creds as cr
+import config as cfg
 
 
 class FetchContacts(object):
     def __init__(self):
-        self.CLIENT_ID = '428607628598-dd19u5f3ma4rssk8sbm1ccjsbe3pq1ip.apps.googleusercontent.com'
-        self.CLIENT_SECRET = 'fLOZ4Po28pAUB1wYA_WbsZql'
-        self.SCOPE = 'https://www.google.com/m8/feeds/'
-        self.USER_AGENT = 'Scarlett-AI'
-        self.APPLICATION_REDIRECT_URI = 'http://localhost/oauth2callback'
+        self.CLIENT_ID = cr.CONTACTS_GOOGLE_AUTH_CLIENT_ID
+        self.CLIENT_SECRET = cr.CONTACTS_GOOGLE_AUTH_CLIENT_SECRET
+        self.SCOPE = cr.CONTACTS_GOOGLE_AUTH_SCOPE
+        self.USER_AGENT = cr.CONTACTS_GOOGLE_AUTH_USER_AGENT
+        self.APPLICATION_REDIRECT_URI = cr.CONTACTS_GOOGLE_AUTH_APP_REDIRECT_URI
 
-        self.path_to_gcekodriver = "/usr/local/bin/chromedriver"
+        self.path_to_driver = cfg.PATH_To_CHROMEDRIVER
 
-        self.username = "d.kanhar"
-        self.password = "2NINitu!1"
+        self.username = cr.GOOGLE_UID
+        self.password = cr.GOOGLE_PWD
 
-        self.num_contacts = 10000
+        self.num_contacts = cfg.NUM_CONTACTS
         self.sleep_time = 5
 
         pass
@@ -157,7 +159,7 @@ class FetchContacts(object):
         return auth_token
 
     def __open_browser(self):
-        driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")
+        driver = webdriver.Chrome(executable_path=self.path_to_driver)
         return driver
 
     def __fetch_contacts(self):

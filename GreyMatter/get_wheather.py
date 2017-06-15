@@ -4,10 +4,12 @@ import requests
 from pprint import pprint
 from SenseCells.tts import tts
 from datetime import datetime, timedelta
+import config as cfg
+import creds as cr
 
 
 def get_location():
-    url = "http://ipinfo.io/json"
+    url = cfg.IPINFO_URL_API
     response = urlopen(url)
     resp = json.load(response)
 
@@ -23,14 +25,14 @@ def get_weather(day=1):
     lat = coordinates.split(",")[0]
     lon = coordinates.split(",")[1]
 
-    API_key = "a00f94d85e7a9c5518446eb5f1b3ce21"
+    API_key = cr.OPENWEATHERMAP_APY_KEY
 
     if day == 1:
 
         try:
-            r = requests.get('http://api.openweathermap.org/data/2.5/weather?lat={}&lon={}&APPID={}&units=metric'.format(lat, lon, API_key))
+            r = requests.get(cr.OWM_LAT_LONG_API_URL.format(lat, lon, API_key))
         except:
-            r = requests.get('http://api.openweathermap.org/data/2.5/weather?q={}&APPID={}&units=metric'.format(city, API_key))
+            r = requests.get(cr.OWM_CITY_API_URL.format(city, API_key))
 
         # pprint(r.json())
         weather = r.json()
@@ -48,13 +50,13 @@ def get_weather(day=1):
         # temp_max = (temp_max - 32) * 5 / 9
         # temp_min = (temp_min - 32) * 5 / 9
 
-        if temp > 25:
+        if temp > cfg.SUNNY_WEATHER_LOW_TEMP:
             type_temp = "Sunny"
-        elif temp < 15:
+        elif temp < cfg.CHILLY_WEATHER_HIGH_TEMP:
             type_temp = "Chilly"
-        elif temp > 35:
+        elif temp > cfg.BURNING_WEATHER_LOW_TEMP:
             type_temp = "Burning"
-        elif temp >= 15 and temp <= 25:
+        elif cfg.CHILLY_WEATHER_HIGH_TEMP <= temp <= cfg.SUNNY_WEATHER_LOW_TEMP:
             type_temp = "Pleasant"
 
         # Convert UTC to datetime
@@ -71,10 +73,8 @@ def get_weather(day=1):
         day_end = datetime.now().date()
 
         try:
-            r = requests.get('http://history.openweathermap.org/data/2.5/history/city?\
-                            lat={}&lon={}&type=daily&APPID={}&units=metric&start={}&end={}'.format(lat, lon, API_key, day_start, day_end))
+            r = requests.get(cr.OWM_HISTORY_LAT_LONG_URL.format(lat, lon, API_key, day_start, day_end))
         except:
-            r = requests.get('http://history.openweathermap.org/data/2.5/history/city?\
-                            q={}&APPID={}&units=metric&type=daily&start={}&end={}'.format(city, API_key, day_start, day_end))
+            r = requests.get(cr.OWM_HISTORY_CITY_URL.format(city, API_key, day_start, day_end))
 
     pass

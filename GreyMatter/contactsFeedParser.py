@@ -1,8 +1,9 @@
 import pickle
 import pandas as pd
+import config as cfg
 
 
-class googleContactsFeedParser(object):
+class GoogleContactsFeedParser(object):
     def __init__(self):
 
         pass
@@ -12,7 +13,7 @@ class googleContactsFeedParser(object):
         df = self.__create_frame_structure__()
         # print(df)
         if message is not None:
-            f = open("contactsFeed.pkl", "wb+")
+            f = open(cfg.CONTACTS_DUMP_BIN, "wb+")
             if deep:
                 pickle.dump(message, f)
 
@@ -20,7 +21,7 @@ class googleContactsFeedParser(object):
 
             f.close()
         else:
-            f = open("contactsFeed.pkl", "rb+")
+            f = open(cfg.CONTACTS_DUMP_BIN, "rb+")
             message = pickle.load(f)
             message = str(message)
 
@@ -138,7 +139,7 @@ class googleContactsFeedParser(object):
         df = df.rename(columns={"index": "NAME"})
         print(df)
 
-        df.to_csv("Contacts.csv")
+        df.to_csv(cfg.CONTACTS_DUMP_CSV)
         return df
 
     def find_all(self, a_str, sub):
@@ -159,5 +160,5 @@ class googleContactsFeedParser(object):
 
 if __name__ == '__main__':
 
-    obj = googleContactsFeedParser()
+    obj = GoogleContactsFeedParser()
     obj.parse_()

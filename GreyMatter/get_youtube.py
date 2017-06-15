@@ -3,11 +3,13 @@ import urllib2
 from bs4 import BeautifulSoup
 import pafy
 import os
+import config as cfg
+import creds as cr
 
 
 def search_video(songToSearch, speechSpoken):
     query = urllib.quote(songToSearch)
-    url = "https://www.youtube.com/results?search_query=" + query
+    url = cfg.YOUTUBE_SEARCH_URL + query
     response = urllib2.urlopen(url)
     html = response.read()
     soup = BeautifulSoup(html)
@@ -73,7 +75,6 @@ def search_video(songToSearch, speechSpoken):
 
         pass
 
-
     # We need to generate logic which takes weighted average of Ratings, Likes & Views to get best video.
     # Now, simple best video is one with max Views.
 
@@ -90,7 +91,7 @@ def search_video(songToSearch, speechSpoken):
     # bestaudio.download(quiet=False, filepath=os.getcwd()+"/../../../Songs/")
 
     # Download webm file, lowest resolution
-    song = audiostreams[0].download(quiet=False, filepath=os.getcwd()+"/../../../Songs/")
+    song = audiostreams[0].download(quiet=False, filepath=os.getcwd()+cfg.YOUTUBE_SONG_PATH)
     print(audiostreams)
     print(song)
     print(song[:-5]+'.mp3')
@@ -99,7 +100,7 @@ def search_video(songToSearch, speechSpoken):
 
     # Convert webm to m4a using subprocess
     import pipes
-    cmd = "ffmpeg -i {} -strict -2 {} -y".format(pipes.quote(os.path.abspath(song_origin)),
+    cmd = cfg.YOUTUBE_FFMPEG_FORMAT_CONVERT.format(pipes.quote(os.path.abspath(song_origin)),
                                               pipes.quote(os.path.abspath(song_source)))
     print(cmd)
     os.system(cmd)
@@ -112,7 +113,7 @@ def search_video(songToSearch, speechSpoken):
 
 
 def identify_artist(speech):
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.abspath(os.getcwd() + "/../auth/Scarlett-AI-d24ab19222e3.json")
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.abspath(os.getcwd() + cr.GOOGLE_APP_NLP_CRED_PATH)
     print(os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
 
     # Using Google Cloud API
@@ -120,12 +121,12 @@ def identify_artist(speech):
     # import httplib2
     # from oauth2client.client import GoogleCredentials
     #
-    # DISCOVERY_URL = ('https://{api}.googleapis.com/'
-    #                  '$discovery/rest?version={apiVersion}')
+    # DISCOVERY_URL = cr.GOOGLE_APP_NLP_DISCOVERY_URL
     #
     # http = httplib2.Http()
     #
-    # credentials = GoogleCredentials.get_application_default().create_scoped(['https://www.googleapis.com/auth/cloud-platform'])
+    # credentials =
+    # GoogleCredentials.get_application_default().create_scoped(['https://www.googleapis.com/auth/cloud-platform'])
     # credentials.authorize(http)
     #
     # service = discovery.build('language', 'v1beta2', http=http, discoveryServiceUrl=DISCOVERY_URL)
@@ -152,9 +153,9 @@ def identify_artist(speech):
     import watson_developer_cloud
     import watson_developer_cloud.natural_language_understanding.features.v1 as features
 
-    nlu = watson_developer_cloud.NaturalLanguageUnderstandingV1(version="2017-05-24",
-                                                                username="8ae096a9-9d65-4f6f-a0c4-1e225e05ceb5",
-                                                                password="cxrnKFvVgAGR")
+    nlu = watson_developer_cloud.NaturalLanguageUnderstandingV1(version=cr.IBM_WDC_NLUV1_VERSION,
+                                                                username=cr.IBM_WDC_NLUV1_USERNAME,
+                                                                password=cr.IBM_WDC_NLUV1_PASSWORD)
     ret = nlu.analyze(text=speech, features=[features.Entities(), features.Keywords()])
 
     pprint(ret)
