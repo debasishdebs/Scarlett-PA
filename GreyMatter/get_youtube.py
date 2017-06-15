@@ -7,6 +7,17 @@ import config as cfg
 import creds as cr
 
 
+class GetYoutubeMusic(object):
+    def __init__(self):
+        pass
+
+    def __driver__(self):
+        return
+
+    def run_(self):
+        pass
+
+
 def search_video(songToSearch, speechSpoken):
     query = urllib.quote(songToSearch)
     url = cfg.YOUTUBE_SEARCH_URL + query

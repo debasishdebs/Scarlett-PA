@@ -8,73 +8,89 @@ import config as cfg
 import creds as cr
 
 
-def get_location():
-    url = cfg.IPINFO_URL_API
-    response = urlopen(url)
-    resp = json.load(response)
+class GetWeather(object):
+    def __init__(self, DAY=1):
+        self.OWM_LAT_LONG_API_URL = cr.OWM_LAT_LONG_API_URL
+        self.OWM_CITY_API_URL = cr.OWM_CITY_API_URL
+        self.API_KEY = cr.OPENWEATHERMAP_APY_KEY
+        self.OWM_HISTORY_LAT_LONG_API_URL = cr.OWM_HISTORY_LAT_LONG_URL
+        self.OWM_HISTORY_CITY_API_URL = cr.OWM_HISTORY_CITY_URL
+        self.IPINFO_URL = cfg.IPINFO_URL_API
 
-    city = resp['city']
-    country = resp['country']
-    coordinates = resp['loc']
+        self.day = DAY
 
-    return city, country, coordinates
+        self.t1 = cfg.CHILLY_WEATHER_HIGH_TEMP
+        self.t2 = cfg.SUNNY_WEATHER_LOW_TEMP
+        self.t3 = cfg.BURNING_WEATHER_LOW_TEMP
+        pass
 
-def get_weather(day=1):
-    city, country, coordinates = get_location()
+    def __driver__(self):
+        self.city, self.country, self.coordinates = self.get_location()
+        self.get_weather()
+        pass
 
-    lat = coordinates.split(",")[0]
-    lon = coordinates.split(",")[1]
+    def get_location(self):
+        url = self.IPINFO_URL
+        response = urlopen(url)
+        resp = json.load(response)
 
-    API_key = cr.OPENWEATHERMAP_APY_KEY
+        city = resp['city']
+        country = resp['country']
+        coordinates = resp['loc']
 
-    if day == 1:
+        return city, country, coordinates
 
-        try:
-            r = requests.get(cr.OWM_LAT_LONG_API_URL.format(lat, lon, API_key))
-        except:
-            r = requests.get(cr.OWM_CITY_API_URL.format(city, API_key))
+    def get_weather(self):
+        city, country, coordinates = self.city, self.country, self.coordinates
 
-        # pprint(r.json())
-        weather = r.json()
+        lat = coordinates.split(",")[0]
+        lon = coordinates.split(",")[1]
 
-        temp = weather['main']['temp']
-        temp_max = weather['main']['temp_max']
-        temp_min = weather['main']['temp_min']
-        sunrise = weather['sys']['sunrise']
-        sunset = weather['sys']['sunset']
-        windspeed = weather['wind']['speed']
-        humidity = weather['main']['humidity']
+        API_key = self.API_KEY
 
-        # # Convert Degree F to Degree C
-        # temp = (temp-32)*5/9
-        # temp_max = (temp_max - 32) * 5 / 9
-        # temp_min = (temp_min - 32) * 5 / 9
+        if self.day == 1:
 
-        if temp > cfg.SUNNY_WEATHER_LOW_TEMP:
-            type_temp = "Sunny"
-        elif temp < cfg.CHILLY_WEATHER_HIGH_TEMP:
-            type_temp = "Chilly"
-        elif temp > cfg.BURNING_WEATHER_LOW_TEMP:
-            type_temp = "Burning"
-        elif cfg.CHILLY_WEATHER_HIGH_TEMP <= temp <= cfg.SUNNY_WEATHER_LOW_TEMP:
-            type_temp = "Pleasant"
+            try:
+                r = requests.get(self.OWM_LAT_LONG_API_URL.format(lat, lon, API_key))
+            except:
+                r = requests.get(self.OWM_CITY_API_URL.format(city, API_key))
 
-        # Convert UTC to datetime
-        sunrise = datetime.fromtimestamp(sunrise).strftime("%H:%M")
-        sunset = datetime.fromtimestamp(sunset).strftime("%H:%M")
+            weather = r.json()
 
-        message = "Today is a {} day with temperature of {} degree Celsius. The maximum and minimum temperatures forecasted for today are {} and {} degree Celsius respectively. \
-                  The windspeed for today is {} meters per second with a humidity of {} percentage. The sunrise and sunset are forecasted at {} AM and {} PM respectively".format(
-                    type_temp, temp, temp_max, temp_min, windspeed, humidity, sunrise, sunset)
-        tts(message)
+            temp = weather['main']['temp']
+            temp_max = weather['main']['temp_max']
+            temp_min = weather['main']['temp_min']
+            sunrise = weather['sys']['sunrise']
+            sunset = weather['sys']['sunset']
+            windspeed = weather['wind']['speed']
+            humidity = weather['main']['humidity']
 
-    else:
-        day_start = datetime.now().date() - timedelta(days=day)
-        day_end = datetime.now().date()
+            if temp > self.t2:
+                type_temp = "Sunny"
+            elif temp < self.t1:
+                type_temp = "Chilly"
+            elif temp > self.t3:
+                type_temp = "Burning"
+            elif self.t1 <= temp <= self.t2:
+                type_temp = "Pleasant"
 
-        try:
-            r = requests.get(cr.OWM_HISTORY_LAT_LONG_URL.format(lat, lon, API_key, day_start, day_end))
-        except:
-            r = requests.get(cr.OWM_HISTORY_CITY_URL.format(city, API_key, day_start, day_end))
+            # Convert UTC to datetime
+            sunrise = datetime.fromtimestamp(sunrise).strftime("%H:%M")
+            sunset = datetime.fromtimestamp(sunset).strftime("%H:%M")
 
-    pass
+            message = "Today is a {} day with temperature of {} degree Celsius. The maximum and minimum \
+                            temperatures forecasted for today are {} and {} degree Celsius respectively. \
+                          The windspeed for today is {} meters per second with a humidity of {} percentage. \
+                          The sunrise and sunset are forecasted at {} AM and {} PM respectively".format(
+                type_temp, temp, temp_max, temp_min, windspeed, humidity, sunrise, sunset)
+            tts(message)
+
+        else:
+            day_start = datetime.now().date() - timedelta(days=self.day)
+            day_end = datetime.now().date()
+
+            try:
+                r = requests.get(self.OWM_HISTORY_LAT_LONG_API_URL.format(lat, lon, API_key, day_start, day_end))
+            except:
+                r = requests.get(self.OWM_HISTORY_CITY_API_URL.format(city, API_key, day_start, day_end))
+        pass
