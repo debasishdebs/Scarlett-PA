@@ -131,6 +131,8 @@ class GetNotifications(object):
 
             result = json.loads(result)
 
+            print(result)
+
             if result["type"] == "tickle":
                 r = requests.get(self.url, headers=self.headers)
                 re = r.json()
@@ -146,6 +148,10 @@ class GetNotifications(object):
                 application = push['application_name']
                 text = push['body']
                 sender = push['title']
+
+                print("App : ", application)
+                print("Content : ", text)
+                print("Sender : ", sender)
 
                 # Clean title
                 no_msg = 0
@@ -172,6 +178,9 @@ class GetNotifications(object):
                     # Incoming call handling
                     by = push['body']
                     msg = "You have an {} by {}".format(sender, by)
+                elif "Gmail" in application:
+                    # Gmail Handling
+                    msg = "You have a new mail from {}".format(sender)
                 else:
                     # Incoming message handling. Tested for the following apps:
                     # Whatsapp

@@ -179,11 +179,13 @@ class GetYoutubeMusic(object):
 
         # Download webm file, lowest resolution
         song = audiostreams[0].download(quiet=False, filepath=os.getcwd() + self.YT_SAVED_PATH)
+        print("SAVED AT ", song)
         return song
 
-    def convert_audio(self, song, TO='mp3'):
+    def convert_audio(self, song, TO='.mp3'):
         song_origin = song
-        song_dest = song[:-5] + '{}'.format(TO)
+        k = song.rfind(".")
+        song_dest = song[:k] + '{}'.format(TO)
 
         # Convert webm to m4a using subprocess
         cmd = self.CONVERT_AUDIO_FFMPEG_COMMAND.format(pipes.quote(os.path.abspath(song_origin)),
@@ -233,6 +235,8 @@ class GetYoutubeMusic(object):
         song = self.download_video(best_video)
 
         song_dest = self.convert_audio(song)
+
+        print(song_dest, " is the full path to play")
 
         ret = self.play_audio(song_dest)
 

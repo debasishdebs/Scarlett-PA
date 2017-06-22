@@ -17,7 +17,7 @@ CONTACTS_DUMP_CSV = "condactsFeed.csv"
 
 YOUTUBE_SEARCH_URL = "https://www.youtube.com/results?search_query="
 
-YOUTUBE_SONG_PATH = "/../../../Songs/"
+YOUTUBE_SONG_PATH = "/../../songs/"
 YOUTUBE_FFMPEG_FORMAT_CONVERT = "ffmpeg -i {} -strict -2 {} -y"
 
 IPINFO_URL_API = "http://ipinfo.io/json"
