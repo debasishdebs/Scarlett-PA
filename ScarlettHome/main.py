@@ -1,4 +1,5 @@
 from AlwaysOnSpeaker import AlwaysOnSpeaker
+from AlwaysOnKeyboard import AlwaysOnKeyboard
 from ScarlettFunctionality import ScarlettFunctionality
 from GreyMatter.pushbullet_notifications import GetNotifications
 
@@ -10,7 +11,13 @@ class ScarlettHome(object):
         pass
 
     def start_home(self):
-        aos = AlwaysOnSpeaker()
+        prompt = raw_input("Enter 1 to interact using voice, else 2 for keyboard!")
+        prompt = int(prompt)
+        if prompt == 1:
+            aos = AlwaysOnSpeaker()
+        else:
+            aos = AlwaysOnKeyboard()
+
         sf = ScarlettFunctionality()
 
         flag = True

@@ -2,6 +2,7 @@ from brain import brain
 
 name = "Debasish"
 
+
 class AlwaysOnKeyboard(object):
     def __init__(self):
         pass
@@ -13,7 +14,7 @@ class AlwaysOnKeyboard(object):
     def start(self):
         msg = self.listen_keyboard()
         ret = brain(name, msg)
-        
+
         if not ret:
             return ret
 

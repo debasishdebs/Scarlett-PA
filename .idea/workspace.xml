@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5ade731a-afa3-4b11-b48b-c0a33a231edc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ScarlettHome/AlwaysOnKeyboard.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ScarlettHome/AlwaysOnSpeaker.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ScarlettHome/ScarlettFunctionality.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ScarlettHome/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ScarlettHome/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GreyMatter/SenseCells/tts.py" afterPath="$PROJECT_DIR$/GreyMatter/SenseCells/tts.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GreyMatter/pushbullet_notifications.py" afterPath="$PROJECT_DIR$/GreyMatter/pushbullet_notifications.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/brain.py" afterPath="$PROJECT_DIR$/brain.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ScarlettHome/AlwaysOnKeyboard.py" afterPath="$PROJECT_DIR$/ScarlettHome/AlwaysOnKeyboard.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ScarlettHome/main.py" afterPath="$PROJECT_DIR$/ScarlettHome/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ScarlettHome/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="399">
-              <caret line="25" column="52" lean-forward="false" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
+              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -78,11 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlwaysOnKeyboard.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AlwaysOnKeyboard.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ScarlettHome/AlwaysOnKeyboard.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="15" column="8" lean-forward="true" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+            <state relative-caret-position="247">
+              <caret line="13" column="20" lean-forward="true" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -157,9 +150,9 @@
         <option value="$PROJECT_DIR$/ScarlettHome/ScarlettFunctionality.py" />
         <option value="$PROJECT_DIR$/GreyMatter/SenseCells/tts.py" />
         <option value="$PROJECT_DIR$/ScarlettHome/AlwaysOnSpeaker.py" />
-        <option value="$PROJECT_DIR$/ScarlettHome/main.py" />
         <option value="$PROJECT_DIR$/brain.py" />
         <option value="$PROJECT_DIR$/ScarlettHome/AlwaysOnKeyboard.py" />
+        <option value="$PROJECT_DIR$/ScarlettHome/main.py" />
       </list>
     </option>
   </component>
@@ -660,16 +653,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScarlettHome/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="25" column="52" lean-forward="false" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GreyMatter/get_youtube.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3933">
@@ -700,9 +683,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ScarlettHome/AlwaysOnKeyboard.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="8" lean-forward="true" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+        <state relative-caret-position="247">
+          <caret line="13" column="20" lean-forward="true" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScarlettHome/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
