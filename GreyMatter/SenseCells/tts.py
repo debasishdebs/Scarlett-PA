@@ -2,9 +2,9 @@ import os
 import sys
 
 def tts(message):
-	print("Recognized speech by Google is {}".format(message))
+	# print("Recognized speech by Google is {}".format(message))
 
-	print("Sending it back to speech engine to hear back what was said!")
+	# print("Sending it back to speech engine to hear back what was said!")
 
 	tts_command = "espeak -ven-us+f3"
 

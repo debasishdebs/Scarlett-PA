@@ -92,6 +92,14 @@ class GetNotifications(object):
         self.headers = {'Access-Token': self.API_key}
         pass
 
+    def start(self):
+        self.ws = self.__create_connection()
+        self.pb = self.__create_pb_object()
+
+        self.__mirror_notifications()
+
+        pass
+
     def mirror(self):
         self.ws = self.__create_connection()
         self.pb = self.__create_pb_object()
