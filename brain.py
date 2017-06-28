@@ -38,7 +38,7 @@ def brain(name, speech_text):
         get_wheather.GetWeather()
         return True
     elif check_message("play"):
-        print(speech_text)
+        # print(speech_text)
         obj = get_youtube.GetYoutubeMusic(speech_text)
         obj.run_()
         return True

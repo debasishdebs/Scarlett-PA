@@ -30,8 +30,6 @@ class ScarlettHome(object):
 
             flag = r1 & r2
 
-        # threading.Thread(target=aos.start).start(a)
-        # threading.Thread(target=sf.execute).start()
         pass
 
     def start_notification_mirror(self):

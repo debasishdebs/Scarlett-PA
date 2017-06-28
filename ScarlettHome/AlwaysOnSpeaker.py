@@ -17,6 +17,9 @@ class AlwaysOnSpeaker(object):
         with sr.Microphone() as source:
             audio = r.listen(source)
 
+        # threading.Thread(target=aos.start).start(a)
+        # threading.Thread(target=sf.execute).start()
+
         try:
             recognized_audio = r.recognize_google(audio)
 
