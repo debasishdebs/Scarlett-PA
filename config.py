@@ -13,7 +13,7 @@ PATH_To_CHROMEDRIVER = "/usr/local/bin/chromedriver"
 NUM_CONTACTS = 10000
 
 CONTACTS_DUMP_BIN = "contactsFeed.pkl"
-CONTACTS_DUMP_CSV = "condactsFeed.csv"
+CONTACTS_DUMP_CSV = "contactsFeed.csv"
 
 YOUTUBE_SEARCH_URL = "https://www.youtube.com/results?search_query="
 
