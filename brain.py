@@ -1,4 +1,4 @@
-from GreyMatter import general_conversations, tell_time, get_wheather, get_youtube
+from GreyMatter import general_conversations, tell_time, get_wheather, get_youtube, send_sms
 
 
 def brain(name, speech_text):
@@ -42,6 +42,14 @@ def brain(name, speech_text):
         obj = get_youtube.GetYoutubeMusic(speech_text)
         obj.run_()
         return True
+    elif check_message("facebook") and check_message("message"):
+        obj = send_sms.SendMessenger()
+        # Prompt for message value. Contact name will be parsed from first part of speech
+        obj.send("DEFAULT MESSAGE", "Contact")
+    elif (check_message("text") or check_message("sms")) and check_message("message"):
+        obj = send_sms.SendSMS()
+        # Prompt for message value. Contact name will be parsed from first part of speech
+        obj.send("Default Message", "Contact")
     else:
         general_conversations.undefined(speech_text)
         return False
