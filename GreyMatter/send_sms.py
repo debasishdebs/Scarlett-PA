@@ -26,7 +26,6 @@ class ContactDriver(object):
         return df
 
     def fetch_contact(self, contactName):
-
         contact_details = self.contacts[self.contacts['NAME'] == contactName][['NAME', 'PHONE', 'EMAIL']]
 
         return contact_details
@@ -120,4 +119,4 @@ if __name__ == '__main__':
     # obj = SendMessenger()
     # obj.send("Hi. This is check. I'm texting u using my JARVIS, i.e. Scarlett!", "Ayushi Verma")
     obj = SendSMS()
-    obj.send("Hi. This is test. Sending SMS from Scarlett!", "Rocky")
+    obj.send("Hi. This is test. Sending SMS from Scarlett!", "Ayushi Verma")

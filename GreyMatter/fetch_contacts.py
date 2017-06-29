@@ -85,8 +85,8 @@ def backup():
         print(feed)
         # print(feed[0])
 
-        from contactsFeedParser import googleContactsFeedParser
-        parser = googleContactsFeedParser()
+        from contactsFeedParser import GoogleContactsFeedParser
+        parser = GoogleContactsFeedParser()
         print(100*"-")
         parser.parse_(message=feed)
 
@@ -102,7 +102,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 import atom.http_core
 import gdata.contacts.client
-from contactsFeedParser import googleContactsFeedParser
+from contactsFeedParser import GoogleContactsFeedParser
 import time
 import creds as cr
 import config as cfg
@@ -171,7 +171,7 @@ class FetchContacts(object):
 
     def __parse_contacts(self):
 
-        parser = googleContactsFeedParser()
+        parser = GoogleContactsFeedParser()
         parser.parse_(message=self.contactsFeed)
         contacts = parser.get_()
 
